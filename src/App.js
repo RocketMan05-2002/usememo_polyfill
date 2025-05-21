@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useMemo, useState } from "react"
+import useCustomMemo from "./hooks/useCustomMemo";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default function App(){
+    const[count,setCount] = useState(0);
+    const[count2,setCount2] = useState(100);
+
+    const expensive =()=>{
+        console.log("expensive function");
+        return count*count;
+    }
+
+    const memoized = useCustomMemo(expensive,[count]); //returns a value
+
+    return <div className="wrapper">
+        <div className="expensive">
+        <h1>{count}</h1>
+        <h2>{memoized}</h2>
+        <button onClick={()=>setCount(count+1)}>+</button>
+        </div>
+
+        <div className="non-expensive">
+        <h1>{count2}</h1>
+        <button onClick={()=>setCount2(count2-1)}>-</button>
+        </div>
     </div>
-  );
 }
-
-export default App;
