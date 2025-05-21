@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
 import useCustomMemo from "./hooks/useCustomMemo";
+import './styles.css'
 
 export default function App(){
     const[count,setCount] = useState(0);
@@ -15,7 +16,7 @@ export default function App(){
     return <div className="wrapper">
         <div className="expensive">
         <h1>{count}</h1>
-        <h2>{memoized}</h2>
+        <h1>{memoized}</h1>
         <button onClick={()=>setCount(count+1)}>+</button>
         </div>
 
